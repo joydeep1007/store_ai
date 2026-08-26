@@ -1,0 +1,460 @@
+{
+    "stores": {
+        "input_rows": 5,
+        "output_rows": 5
+    },
+    "transactions": {
+        "input_rows": 8541,
+        "duplicate_rows_removed": 70,
+        "invalid_store_rows_removed": 35,
+        "output_rows": 8436,
+        "excluded_invalid_store_records": [
+            {
+                "transaction_id": "T008460",
+                "store_id": "S09",
+                "timestamp": "2025-04-22 17:15:00",
+                "amount": 70.49,
+                "item_count": 5,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008466",
+                "store_id": "S09",
+                "timestamp": "2025-05-05 20:03:00",
+                "amount": 40.2,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008471",
+                "store_id": "S09",
+                "timestamp": "2025-05-29 18:37:00",
+                "amount": 29.95,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008470",
+                "store_id": "S09",
+                "timestamp": "2025-05-13 11:16:00",
+                "amount": 68.43,
+                "item_count": 2,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008447",
+                "store_id": "S09",
+                "timestamp": "2025-05-23 17:08:00",
+                "amount": 20.37,
+                "item_count": 3,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008437",
+                "store_id": "S09",
+                "timestamp": "2025-04-28 12:42:00",
+                "amount": 43.56,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008456",
+                "store_id": "S09",
+                "timestamp": "2025-04-11 11:55:00",
+                "amount": 95.83,
+                "item_count": 6,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008462",
+                "store_id": "S09",
+                "timestamp": "2025-05-21 12:08:00",
+                "amount": 147.87,
+                "item_count": 6,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008442",
+                "store_id": "S09",
+                "timestamp": "2025-05-10 20:57:00",
+                "amount": 14.26,
+                "item_count": 1,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008465",
+                "store_id": "S09",
+                "timestamp": "2025-05-28 15:26:00",
+                "amount": 16.54,
+                "item_count": 1,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008457",
+                "store_id": "S09",
+                "timestamp": "2025-04-08 18:21:00",
+                "amount": 51.71,
+                "item_count": 2,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008468",
+                "store_id": "S09",
+                "timestamp": "2025-05-02 12:04:00",
+                "amount": 23.99,
+                "item_count": 1,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008446",
+                "store_id": "S09",
+                "timestamp": "2025-05-28 20:49:00",
+                "amount": 27.77,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008448",
+                "store_id": "S09",
+                "timestamp": "2025-04-09 14:45:00",
+                "amount": 29.25,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008444",
+                "store_id": "S09",
+                "timestamp": "2025-05-11 19:01:00",
+                "amount": 36.23,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008464",
+                "store_id": "S09",
+                "timestamp": "2025-04-09 09:13:00",
+                "amount": 61.95,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008461",
+                "store_id": "S09",
+                "timestamp": "2025-04-14 20:48:00",
+                "amount": 46.55,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008459",
+                "store_id": "S09",
+                "timestamp": "2025-04-29 15:01:00",
+                "amount": 66.38,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008440",
+                "store_id": "S09",
+                "timestamp": "2025-04-30 11:26:00",
+                "amount": 29.11,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008454",
+                "store_id": "S09",
+                "timestamp": "2025-05-02 18:38:00",
+                "amount": 24.17,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008439",
+                "store_id": "S09",
+                "timestamp": "2025-05-01 10:48:00",
+                "amount": 61.79,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008451",
+                "store_id": "S09",
+                "timestamp": "2025-05-16 16:49:00",
+                "amount": 96.35,
+                "item_count": 5,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008467",
+                "store_id": "S09",
+                "timestamp": "2025-04-23 15:06:00",
+                "amount": 50.56,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008438",
+                "store_id": "S09",
+                "timestamp": "2025-05-01 14:36:00",
+                "amount": 66.78,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008441",
+                "store_id": "S09",
+                "timestamp": "2025-05-31 20:02:00",
+                "amount": 19.34,
+                "item_count": 1,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008463",
+                "store_id": "S09",
+                "timestamp": "2025-04-26 13:25:00",
+                "amount": 53.62,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008453",
+                "store_id": "S09",
+                "timestamp": "2025-05-22 16:31:00",
+                "amount": 14.92,
+                "item_count": 2,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008450",
+                "store_id": "S09",
+                "timestamp": "2025-04-29 10:47:00",
+                "amount": 71.21,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008445",
+                "store_id": "S09",
+                "timestamp": "2025-05-21 18:28:00",
+                "amount": 66.19,
+                "item_count": 3,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008458",
+                "store_id": "S09",
+                "timestamp": "2025-05-17 10:55:00",
+                "amount": 50.72,
+                "item_count": 4,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008469",
+                "store_id": "S09",
+                "timestamp": "2025-04-14 17:16:00",
+                "amount": 13.68,
+                "item_count": 1,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008452",
+                "store_id": "S09",
+                "timestamp": "2025-04-07 17:14:00",
+                "amount": 30.02,
+                "item_count": 2,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008449",
+                "store_id": "S09",
+                "timestamp": "2025-05-16 13:31:00",
+                "amount": 37.08,
+                "item_count": 3,
+                "channel": "in_store",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008443",
+                "store_id": "S09",
+                "timestamp": "2025-05-07 19:39:00",
+                "amount": 75.82,
+                "item_count": 3,
+                "channel": "online",
+                "promo_code": null
+            },
+            {
+                "transaction_id": "T008455",
+                "store_id": "S09",
+                "timestamp": "2025-05-01 16:59:00",
+                "amount": 59.26,
+                "item_count": 5,
+                "channel": "in_store",
+                "promo_code": null
+            }
+        ]
+    },
+    "staffing_shifts": {
+        "input_rows": 1980,
+        "invalid_store_rows_removed": 15,
+        "output_rows": 1965,
+        "excluded_invalid_store_records": [
+            {
+                "shift_id": "SH001973",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-23 00:00:00",
+                "hours_worked": 7.6,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001966",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-14 00:00:00",
+                "hours_worked": 6.3,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001970",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-26 00:00:00",
+                "hours_worked": 6.9,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001969",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-25 00:00:00",
+                "hours_worked": 7.2,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001977",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-26 00:00:00",
+                "hours_worked": 6.3,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001978",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-24 00:00:00",
+                "hours_worked": 6.0,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001971",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-16 00:00:00",
+                "hours_worked": 5.9,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001980",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-27 00:00:00",
+                "hours_worked": 6.9,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001974",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-10 00:00:00",
+                "hours_worked": 7.4,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001972",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-19 00:00:00",
+                "hours_worked": 6.0,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001975",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-06 00:00:00",
+                "hours_worked": 7.1,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001976",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-17 00:00:00",
+                "hours_worked": 6.8,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001968",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-10 00:00:00",
+                "hours_worked": 6.6,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001979",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-05-11 00:00:00",
+                "hours_worked": 6.3,
+                "role": "cashier"
+            },
+            {
+                "shift_id": "SH001967",
+                "store_id": "S09",
+                "employee_id": "S09-E01",
+                "date": "2025-04-19 00:00:00",
+                "hours_worked": 5.5,
+                "role": "cashier"
+            }
+        ]
+    },
+    "returns": {
+        "input_rows": 408,
+        "output_rows": 408
+    }
+}
