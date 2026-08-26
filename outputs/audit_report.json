@@ -1,0 +1,177 @@
+{
+    "stores": {
+        "schema": {
+            "row_count": 5,
+            "column_count": 4,
+            "missing_expected_columns": [],
+            "unexpected_columns": [],
+            "data_types": {
+                "store_id": "object",
+                "region": "object",
+                "size_sqft": "int64",
+                "opened_year": "int64"
+            }
+        },
+        "missing_values": {},
+        "duplicates": {
+            "completely_duplicated_rows": 0,
+            "rows_with_duplicate_ids": 0,
+            "duplicate_id_values": [],
+            "total_duplicate_id_values": 0
+        },
+        "domain_checks": {}
+    },
+    "transactions": {
+        "schema": {
+            "row_count": 8541,
+            "column_count": 7,
+            "missing_expected_columns": [],
+            "unexpected_columns": [],
+            "data_types": {
+                "transaction_id": "object",
+                "store_id": "object",
+                "timestamp": "object",
+                "amount": "float64",
+                "item_count": "int64",
+                "channel": "object",
+                "promo_code": "object"
+            }
+        },
+        "missing_values": {
+            "promo_code": {
+                "missing_count": 8411,
+                "missing_pct": 98.4779299847793
+            }
+        },
+        "duplicates": {
+            "completely_duplicated_rows": 140,
+            "rows_with_duplicate_ids": 140,
+            "duplicate_id_values": [
+                "T002552",
+                "T002431",
+                "T002574",
+                "T002461",
+                "T002449",
+                "T002478",
+                "T002467",
+                "T002581",
+                "T002507",
+                "T002516"
+            ],
+            "total_duplicate_id_values": 70
+        },
+        "domain_checks": {
+            "distinct_channels": [
+                "in_store",
+                "online"
+            ]
+        },
+        "dates": {
+            "invalid_format_count": 0,
+            "invalid_examples": [],
+            "min_valid_date": "2025-04-07T09:07:00",
+            "max_valid_date": "2025-06-01T20:58:00"
+        },
+        "store_references": {
+            "invalid_reference_row_count": 35,
+            "invalid_store_ids": [
+                "S09"
+            ],
+            "percentage_affected": 0.4097880810209577
+        }
+    },
+    "staffing_shifts": {
+        "schema": {
+            "row_count": 1980,
+            "column_count": 6,
+            "missing_expected_columns": [],
+            "unexpected_columns": [],
+            "data_types": {
+                "shift_id": "object",
+                "store_id": "object",
+                "employee_id": "object",
+                "date": "object",
+                "hours_worked": "float64",
+                "role": "object"
+            }
+        },
+        "missing_values": {},
+        "duplicates": {
+            "completely_duplicated_rows": 0,
+            "rows_with_duplicate_ids": 0,
+            "duplicate_id_values": [],
+            "total_duplicate_id_values": 0
+        },
+        "domain_checks": {
+            "distinct_roles": [
+                "cashier",
+                "manager",
+                "stock",
+                "temp"
+            ]
+        },
+        "dates": {
+            "invalid_format_count": 0,
+            "invalid_examples": [],
+            "min_valid_date": "2025-04-07T00:00:00",
+            "max_valid_date": "2025-06-01T00:00:00"
+        },
+        "store_references": {
+            "invalid_reference_row_count": 15,
+            "invalid_store_ids": [
+                "S09"
+            ],
+            "percentage_affected": 0.7575757575757576
+        }
+    },
+    "returns": {
+        "schema": {
+            "row_count": 408,
+            "column_count": 5,
+            "missing_expected_columns": [],
+            "unexpected_columns": [],
+            "data_types": {
+                "return_id": "object",
+                "store_id": "object",
+                "date": "object",
+                "amount": "float64",
+                "reason_code": "object"
+            }
+        },
+        "missing_values": {},
+        "duplicates": {
+            "completely_duplicated_rows": 0,
+            "rows_with_duplicate_ids": 0,
+            "duplicate_id_values": [],
+            "total_duplicate_id_values": 0
+        },
+        "domain_checks": {},
+        "dates": {
+            "invalid_format_count": 0,
+            "invalid_examples": [],
+            "min_valid_date": "2025-04-07T00:00:00",
+            "max_valid_date": "2025-06-01T00:00:00"
+        },
+        "store_references": {
+            "invalid_reference_row_count": 0,
+            "invalid_store_ids": [],
+            "percentage_affected": 0.0
+        }
+    },
+    "cross_dataset": {
+        "store_week_coverage": {
+            "observed_date_range": {
+                "min": "2025-04-07T00:00:00",
+                "max": "2025-06-01T20:58:00"
+            },
+            "total_weeks": 8,
+            "total_stores": 5,
+            "expected_combinations": 40,
+            "missing_store_week_combinations": {
+                "transactions": 0,
+                "staffing_shifts": 1,
+                "returns": 0
+            }
+        }
+    }
+}
