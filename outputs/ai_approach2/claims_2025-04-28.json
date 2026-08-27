@@ -1,0 +1,82 @@
+{
+  "week_start": "2025-04-28",
+  "claims": [
+    {
+      "store_id": "S01",
+      "week_start": "2025-04-28",
+      "metric": "weekly_revenue",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 12738.1,
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S01 achieved the highest weekly revenue among all stores."
+    },
+    {
+      "store_id": "S03",
+      "week_start": "2025-04-28",
+      "metric": "weekly_revenue",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 8671.07,
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S03 recorded the lowest weekly revenue among all stores."
+    },
+    {
+      "store_id": "S01",
+      "week_start": "2025-04-28",
+      "metric": "sales_per_staffed_hour",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 37.76,
+      "unit": "$",
+      "importance": "medium",
+      "text": "Store S01 had the highest sales per staffed hour."
+    },
+    {
+      "store_id": "S03",
+      "week_start": "2025-04-28",
+      "metric": "sales_per_staffed_hour",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 23.09,
+      "unit": "$",
+      "importance": "medium",
+      "text": "Store S03 had the lowest sales per staffed hour."
+    },
+    {
+      "store_id": "S03",
+      "week_start": "2025-04-28",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 0.22,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S03 reported the lowest return rate among all stores."
+    },
+    {
+      "store_id": "S01",
+      "week_start": "2025-04-28",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 3.79,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S01 reported the highest return rate among all stores."
+    },
+    {
+      "store_id": "S05",
+      "week_start": "2025-04-28",
+      "metric": "staffing_hours",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 386.3,
+      "unit": "hours",
+      "importance": "low",
+      "text": "Store S05 utilized the highest number of staffing hours."
+    }
+  ]
+}

@@ -40,14 +40,17 @@ class Claim(BaseModel):
     week_start: str
     metric: MetricEnum
     claim_type: ClaimTypeEnum
-    value: Union[float, str] = Field(description="The numerical value, percentage, or for rankings strictly 'highest' or 'lowest'")
+    ranking: str | None = Field(default=None, description="Only for ranking claims. Must be exactly 'highest' or 'lowest'.")
+    value: float = Field(description="The numerical value or percentage associated with the claim.")
+    unit: str | None = Field(default=None, description="The unit of the value (e.g. 'percent', 'hours', '$').")
     importance: Literal['high', 'medium', 'low']
     text: str
 
     @model_validator(mode='after')
     def validate_ranking(self):
-        if self.claim_type == 'ranking' and self.value not in ['highest', 'lowest']:
-            raise ValueError("Ranking claims must have value 'highest' or 'lowest'")
+        if self.claim_type == 'ranking':
+            if self.ranking not in ['highest', 'lowest']:
+                raise ValueError("Ranking claims must have ranking 'highest' or 'lowest'")
         return self
 
 class WeeklyClaims(BaseModel):
@@ -112,9 +115,63 @@ Grounding rules:
 8. If a cause is not supported by the metrics, state that further investigation is required.
 9. Claims must identify the correct store, week, and metric.
 10. Return structured JSON only.
-11. If claim_type is 'ranking', the value field MUST be exactly 'highest' or 'lowest'. Do NOT use '1st', 'top', or other natural language strings.
+CLAIM TYPE DEFINITIONS:
 
-Make sure to include value claims, ranking claims (e.g., store with the highest revenue), and percentage claims if you wish (but note the verifier will check the math against the actual previous week data).
+A. VALUE CLAIM
+Use claim_type='value' when the main purpose is to report the actual
+value of a metric for a specific store and week.
+
+Example:
+- Store S01 generated $14,315.48 in weekly revenue.
+
+For a value claim:
+- ranking must be null.
+- value must contain the actual numerical metric value.
+
+B. RANKING CLAIM
+Use claim_type='ranking' ONLY when the relative position of a store
+among all stores for that metric and week is itself an important finding.
+
+Examples:
+- Store S01 had the highest weekly revenue.
+- Store S03 had the lowest sales per staffed hour.
+
+For a ranking claim:
+- ranking MUST be exactly 'highest' or 'lowest'.
+- value MUST contain the actual numerical metric value for that store.
+- Never put 'highest', 'lowest', '1st', 'top', or similar text in value.
+
+C. PERCENTAGE CLAIM
+Use claim_type='percentage' when reporting a percentage metric or a
+week-over-week percentage change, such as revenue_growth_pct or
+return_rate.
+
+Do not convert an ordinary value claim into a ranking claim merely
+because it has a numerical value.
+
+CLAIM SELECTION:
+- Prefer claims that are materially useful to management.
+- Use ranking claims when the highest/lowest position is itself
+  meaningful.
+- Use value claims for important absolute metric observations.
+- Use percentage claims for meaningful percentage movements.
+- Do not force every claim to be a ranking.
+- Do not generate duplicate claims that express the same fact unless
+  the distinction is materially useful.
+
+RANKING FORMAT:
+If claim_type='ranking':
+- ranking MUST be exactly 'highest' or 'lowest'.
+- value MUST be a valid float containing the actual metric value.
+- unit may be '$', 'percent', 'hours', or another appropriate unit.
+
+MISSING DATA:
+- Never substitute zero for missing data.
+- Do not create ranking claims involving a metric when the relevant
+  value is missing or unsupported.
+
+The verifier will independently check every claim against the trusted
+dataset.
 """
 
     response = client.models.generate_content(

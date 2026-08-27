@@ -129,39 +129,56 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
             return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": expected_pct, "claimed_value": claimed_value}
             
     elif claim_type == "ranking":
-        # Determine ranking direction from claim value (e.g., "highest", "lowest", "max", "min", or an integer rank)
+        ranking = claim.get("ranking")
+        if ranking not in ["highest", "lowest"]:
+            return {"status": "FAIL", "reason": f"Invalid ranking value: {ranking}", "expected_value": None, "claimed_value": ranking}
+            
         week_df = df[df['week_start'] == target_week].copy()
         week_df = week_df.dropna(subset=[metric])
         if week_df.empty:
-            return {"status": "FAIL", "reason": "No valid data to calculate ranking.", "expected_value": None, "claimed_value": claimed_value}
+            return {"status": "FAIL", "reason": "No valid data to calculate ranking.", "expected_value": None, "claimed_value": None}
             
-        # Standardize expected ranking logic
-        str_val = str(claimed_value).lower()
-        if str_val in ["highest", "maximum", "max"]:
+        if ranking == "highest":
             expected_store = week_df.loc[week_df[metric].idxmax(), 'store_id']
-            if expected_store == store_id:
-                return {"status": "PASS", "reason": "Ranking claim (highest) verified.", "expected_value": expected_store, "claimed_value": store_id}
-            else:
-                return {"status": "FAIL", "reason": "Ranking claim failed. Store is not the highest.", "expected_value": expected_store, "claimed_value": store_id}
-        elif str_val in ["lowest", "minimum", "min"]:
-            expected_store = week_df.loc[week_df[metric].idxmin(), 'store_id']
-            if expected_store == store_id:
-                return {"status": "PASS", "reason": "Ranking claim (lowest) verified.", "expected_value": expected_store, "claimed_value": store_id}
-            else:
-                return {"status": "FAIL", "reason": "Ranking claim failed. Store is not the lowest.", "expected_value": expected_store, "claimed_value": store_id}
         else:
-            # Maybe it's a numeric rank? e.g. 1
-            # Sort descending for rank 1 = highest
-            week_df['rank'] = week_df[metric].rank(ascending=False, method='min')
-            actual_rank = week_df[week_df['store_id'] == store_id]['rank'].iloc[0]
-            try:
-                claimed_rank = float(claimed_value)
-                if math.isclose(actual_rank, claimed_rank, rel_tol=1e-3, abs_tol=1e-3):
-                    return {"status": "PASS", "reason": "Numerical ranking verified.", "expected_value": actual_rank, "claimed_value": claimed_rank}
-                else:
-                    return {"status": "FAIL", "reason": "Numerical ranking failed.", "expected_value": actual_rank, "claimed_value": claimed_rank}
-            except Exception:
-                return {"status": "FAIL", "reason": f"Unsupported ranking value format: {claimed_value}", "expected_value": None, "claimed_value": claimed_value}
+            expected_store = week_df.loc[week_df[metric].idxmin(), 'store_id']
+            
+        if expected_store != store_id:
+            return {
+                "status": "FAIL", 
+                "reason": f"Ranking check failed. {store_id} is not the {ranking}.", 
+                "expected_value": {"store": expected_store, "value": None}, 
+                "claimed_value": {"store": store_id, "value": claimed_value}
+            }
+            
+        # Ranking passed, now check numerical value
+        if not isinstance(claimed_value, (int, float)):
+            return {
+                "status": "FAIL",
+                "reason": "Numerical value check failed. Claimed value is not numeric.",
+                "expected_value": {"store": expected_store, "value": actual_value},
+                "claimed_value": {"store": store_id, "value": claimed_value}
+            }
+            
+        if metric == 'return_rate':
+            is_match = math.isclose(actual_value, claimed_value, abs_tol=0.0051)
+        else:
+            is_match = math.isclose(actual_value, claimed_value, rel_tol=1e-3, abs_tol=1e-3)
+            
+        if is_match:
+            return {
+                "status": "PASS", 
+                "reason": f"Ranking claim ({ranking}) and numerical value verified.", 
+                "expected_value": {"store": expected_store, "value": actual_value}, 
+                "claimed_value": {"store": store_id, "value": claimed_value}
+            }
+        else:
+            return {
+                "status": "FAIL", 
+                "reason": "Ranking passed but numerical value check failed.", 
+                "expected_value": {"store": expected_store, "value": actual_value}, 
+                "claimed_value": {"store": store_id, "value": claimed_value}
+            }
 
     return {
         "status": "FAIL",

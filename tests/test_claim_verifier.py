@@ -215,8 +215,63 @@ def test_schema_rejects_unsupported_ranking():
             week_start="2025-04-07",
             metric="sales_per_staffed_hour",
             claim_type="ranking",
-            value="1st",
+            ranking="1st",
+            value=35.48,
             importance="high",
             text="S01 was 1st in sales per staffed hour."
         )
-    assert "must have value 'highest' or 'lowest'" in str(exc_info.value)
+    assert "must have ranking 'highest' or 'lowest'" in str(exc_info.value)
+
+def test_ranking_correct_ranking_correct_value(sample_df):
+    # S02 has highest weekly_revenue (15000) on 2025-05-05
+    claim = {
+        "store_id": "S02",
+        "week_start": "2025-05-05",
+        "metric": "weekly_revenue",
+        "claim_type": "ranking",
+        "ranking": "highest",
+        "value": 15000.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "PASS"
+    assert res['expected_value'] == {"store": "S02", "value": 15000.0}
+
+def test_ranking_correct_ranking_incorrect_value(sample_df):
+    claim = {
+        "store_id": "S02",
+        "week_start": "2025-05-05",
+        "metric": "weekly_revenue",
+        "claim_type": "ranking",
+        "ranking": "highest",
+        "value": 20000.0  # Incorrect value
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "FAIL"
+    assert "numerical value check failed" in res['reason'].lower()
+
+def test_ranking_incorrect_ranking_correct_value(sample_df):
+    # S01 is NOT highest (S02 is)
+    claim = {
+        "store_id": "S01",
+        "week_start": "2025-05-05",
+        "metric": "weekly_revenue",
+        "claim_type": "ranking",
+        "ranking": "highest",
+        "value": 10000.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "FAIL"
+    assert "ranking check failed" in res['reason'].lower()
+
+def test_ranking_incorrect_ranking_incorrect_value(sample_df):
+    claim = {
+        "store_id": "S01",
+        "week_start": "2025-05-05",
+        "metric": "weekly_revenue",
+        "claim_type": "ranking",
+        "ranking": "highest",
+        "value": 99999.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "FAIL"
+    assert "ranking check failed" in res['reason'].lower()

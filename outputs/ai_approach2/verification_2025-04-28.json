@@ -2,150 +2,175 @@
   {
     "claim": {
       "store_id": "S01",
-      "week_start": "2025-04-07",
+      "week_start": "2025-04-28",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
       "ranking": "highest",
-      "value": 14315.48,
+      "value": 12738.1,
       "unit": "$",
       "importance": "high",
-      "text": "Store S01 had the highest weekly revenue of $14,315.48."
+      "text": "Store S01 achieved the highest weekly revenue among all stores."
     },
     "verification": {
       "status": "PASS",
       "reason": "Ranking claim (highest) and numerical value verified.",
       "expected_value": {
         "store": "S01",
-        "value": 14315.48
+        "value": 12738.1
       },
       "claimed_value": {
         "store": "S01",
-        "value": 14315.48
+        "value": 12738.1
       }
     }
   },
   {
     "claim": {
       "store_id": "S03",
-      "week_start": "2025-04-07",
+      "week_start": "2025-04-28",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
       "ranking": "lowest",
-      "value": 7570.76,
+      "value": 8671.07,
       "unit": "$",
       "importance": "high",
-      "text": "Store S03 had the lowest weekly revenue of $7,570.76."
+      "text": "Store S03 recorded the lowest weekly revenue among all stores."
     },
     "verification": {
       "status": "PASS",
       "reason": "Ranking claim (lowest) and numerical value verified.",
       "expected_value": {
         "store": "S03",
-        "value": 7570.76
+        "value": 8671.07
       },
       "claimed_value": {
         "store": "S03",
-        "value": 7570.76
+        "value": 8671.07
       }
     }
   },
   {
     "claim": {
       "store_id": "S01",
-      "week_start": "2025-04-07",
+      "week_start": "2025-04-28",
       "metric": "sales_per_staffed_hour",
       "claim_type": "ranking",
       "ranking": "highest",
-      "value": 44.75,
+      "value": 37.76,
       "unit": "$",
-      "importance": "high",
-      "text": "Store S01 had the highest sales per staffed hour at $44.75."
+      "importance": "medium",
+      "text": "Store S01 had the highest sales per staffed hour."
     },
     "verification": {
       "status": "PASS",
       "reason": "Ranking claim (highest) and numerical value verified.",
       "expected_value": {
         "store": "S01",
-        "value": 44.74985933104095
+        "value": 37.76489771716573
       },
       "claimed_value": {
         "store": "S01",
-        "value": 44.75
+        "value": 37.76
       }
     }
   },
   {
     "claim": {
       "store_id": "S03",
-      "week_start": "2025-04-07",
+      "week_start": "2025-04-28",
       "metric": "sales_per_staffed_hour",
       "claim_type": "ranking",
       "ranking": "lowest",
-      "value": 20.12,
+      "value": 23.09,
       "unit": "$",
-      "importance": "high",
-      "text": "Store S03 had the lowest sales per staffed hour at $20.12."
+      "importance": "medium",
+      "text": "Store S03 had the lowest sales per staffed hour."
     },
     "verification": {
       "status": "PASS",
       "reason": "Ranking claim (lowest) and numerical value verified.",
       "expected_value": {
         "store": "S03",
-        "value": 20.124295587453485
+        "value": 23.092063914780294
       },
       "claimed_value": {
         "store": "S03",
-        "value": 20.12
+        "value": 23.09
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S03",
+      "week_start": "2025-04-28",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 0.22,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S03 reported the lowest return rate among all stores."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S03",
+        "value": 0.22465508870300002
+      },
+      "claimed_value": {
+        "store": "S03",
+        "value": 0.22
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S01",
+      "week_start": "2025-04-28",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 3.79,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S01 reported the highest return rate among all stores."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S01",
+        "value": 3.7902826952214195
+      },
+      "claimed_value": {
+        "store": "S01",
+        "value": 3.79
       }
     }
   },
   {
     "claim": {
       "store_id": "S05",
-      "week_start": "2025-04-07",
-      "metric": "return_rate",
+      "week_start": "2025-04-28",
+      "metric": "staffing_hours",
       "claim_type": "ranking",
       "ranking": "highest",
-      "value": 3.32,
-      "unit": "percent",
-      "importance": "medium",
-      "text": "Store S05 had the highest return rate at 3.32%."
+      "value": 386.3,
+      "unit": "hours",
+      "importance": "low",
+      "text": "Store S05 utilized the highest number of staffing hours."
     },
     "verification": {
       "status": "PASS",
       "reason": "Ranking claim (highest) and numerical value verified.",
       "expected_value": {
         "store": "S05",
-        "value": 3.31860408617168
+        "value": 386.3
       },
       "claimed_value": {
         "store": "S05",
-        "value": 3.32
-      }
-    }
-  },
-  {
-    "claim": {
-      "store_id": "S01",
-      "week_start": "2025-04-07",
-      "metric": "return_rate",
-      "claim_type": "ranking",
-      "ranking": "lowest",
-      "value": 1.69,
-      "unit": "percent",
-      "importance": "medium",
-      "text": "Store S01 had the lowest return rate at 1.69%."
-    },
-    "verification": {
-      "status": "PASS",
-      "reason": "Ranking claim (lowest) and numerical value verified.",
-      "expected_value": {
-        "store": "S01",
-        "value": 1.692503499708
-      },
-      "claimed_value": {
-        "store": "S01",
-        "value": 1.69
+        "value": 386.3
       }
     }
   }
