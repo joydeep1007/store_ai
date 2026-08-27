@@ -6,7 +6,9 @@
       "week_start": "2025-05-05",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
-      "value": "highest",
+      "ranking": "highest",
+      "value": 23516.04,
+      "unit": "$",
       "importance": "high",
       "text": "Store S03 achieved the highest weekly revenue of $23,516.04."
     },
@@ -15,45 +17,55 @@
       "week_start": "2025-05-05",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
-      "value": "lowest",
-      "importance": "medium",
+      "ranking": "lowest",
+      "value": 10241.93,
+      "unit": "$",
+      "importance": "high",
       "text": "Store S05 recorded the lowest weekly revenue of $10,241.93."
+    },
+    {
+      "store_id": "S03",
+      "week_start": "2025-05-05",
+      "metric": "revenue_growth_pct",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": 171.2,
+      "unit": "percent",
+      "importance": "high",
+      "text": "Store S03 experienced a significant revenue growth of 171.20%."
     },
     {
       "store_id": "S04",
       "week_start": "2025-05-05",
       "metric": "return_rate",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "highest",
       "value": 4.59,
-      "importance": "high",
+      "unit": "percent",
+      "importance": "medium",
       "text": "Store S04 had the highest return rate at 4.59%."
     },
     {
       "store_id": "S03",
       "week_start": "2025-05-05",
       "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "highest",
       "value": 56.42,
-      "importance": "high",
-      "text": "Store S03 achieved the highest sales per staffed hour at $56.42."
-    },
-    {
-      "store_id": "S02",
-      "week_start": "2025-05-05",
-      "metric": "return_rate",
-      "claim_type": "value",
-      "value": 1.28,
+      "unit": "$",
       "importance": "medium",
-      "text": "Store S02 maintained the lowest return rate at 1.28%."
+      "text": "Store S03 achieved the highest sales per staffed hour at $56.42."
     },
     {
       "store_id": "S05",
       "week_start": "2025-05-05",
       "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "lowest",
       "value": 27.75,
+      "unit": "$",
       "importance": "medium",
-      "text": "Store S05 had the lowest sales per staffed hour at $27.75."
+      "text": "Store S05 recorded the lowest sales per staffed hour at $27.75."
     }
   ]
 }
