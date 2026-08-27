@@ -11,7 +11,12 @@ from typing import List, Literal, Union
 from google import genai
 from google.genai import types
 
-from claim_verifier import verify_claim
+try:
+    # Used when running as a module or during pytest
+    from src.claim_verifier import verify_claim
+except ModuleNotFoundError:
+    # Used when running script directly via `python src/ai_structured.py`
+    from claim_verifier import verify_claim
 
 load_dotenv()
 
@@ -28,14 +33,22 @@ MetricEnum = Literal[
 
 ClaimTypeEnum = Literal['value', 'percentage', 'ranking']
 
+from pydantic import BaseModel, Field, model_validator, ValidationError
+
 class Claim(BaseModel):
     store_id: str
     week_start: str
     metric: MetricEnum
     claim_type: ClaimTypeEnum
-    value: Union[float, str]
+    value: Union[float, str] = Field(description="The numerical value, percentage, or for rankings strictly 'highest' or 'lowest'")
     importance: Literal['high', 'medium', 'low']
     text: str
+
+    @model_validator(mode='after')
+    def validate_ranking(self):
+        if self.claim_type == 'ranking' and self.value not in ['highest', 'lowest']:
+            raise ValueError("Ranking claims must have value 'highest' or 'lowest'")
+        return self
 
 class WeeklyClaims(BaseModel):
     week_start: str
@@ -99,6 +112,7 @@ Grounding rules:
 8. If a cause is not supported by the metrics, state that further investigation is required.
 9. Claims must identify the correct store, week, and metric.
 10. Return structured JSON only.
+11. If claim_type is 'ranking', the value field MUST be exactly 'highest' or 'lowest'. Do NOT use '1st', 'top', or other natural language strings.
 
 Make sure to include value claims, ranking claims (e.g., store with the highest revenue), and percentage claims if you wish (but note the verifier will check the math against the actual previous week data).
 """
@@ -115,9 +129,12 @@ Make sure to include value claims, ranking claims (e.g., store with the highest 
     )
     
     try:
-        return json.loads(response.text)
-    except json.JSONDecodeError as e:
-        print(f"Error decoding JSON from LLM: {e}")
+        raw_data = json.loads(response.text)
+        # Instantiate Pydantic model to enforce strict validation (including the custom model_validator)
+        validated_data = WeeklyClaims(**raw_data)
+        return validated_data.model_dump()
+    except Exception as e:
+        print(f"Error decoding or validating JSON from LLM: {e}")
         print("Raw response:", response.text)
         sys.exit(1)
 

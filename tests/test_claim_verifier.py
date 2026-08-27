@@ -1,7 +1,9 @@
 import pytest
 import pandas as pd
 import numpy as np
+from pydantic import ValidationError
 from src.claim_verifier import verify_claim
+from src.ai_structured import Claim
 
 @pytest.fixture
 def sample_df():
@@ -16,7 +18,7 @@ def sample_df():
         'transaction_count': [100, 110, 150, 120, 0, 50],
         'staffing_hours': [300.0, 310.0, 350.0, np.nan, 200.0, 210.0],
         'sales_per_staffed_hour': [33.33, 35.48, 42.86, np.nan, 0.0, 23.81],
-        'return_rate': [0.015, 0.020, 0.0128, 0.010, 0.0, 0.025]
+        'return_rate': [0.045900098, 0.020, 0.012757928, 0.010, 0.0, 0.025]
     }
     df = pd.DataFrame(data)
     df['week_start'] = pd.to_datetime(df['week_start'])
@@ -169,13 +171,27 @@ def test_previous_revenue_zero_or_missing(sample_df):
     assert "missing or zero" in res['reason']
 
 def test_correct_return_rate_percentage(sample_df):
-    # S02 return_rate is 0.0128 => 1.28%
+    # S02 return_rate is 0.012757928 => 1.2757928%
+    # A claim of 1.28% should pass because it matches at 2 decimal place rounding
     claim = {
         "store_id": "S02",
         "week_start": "2025-05-05",
         "metric": "return_rate",
         "claim_type": "value",
         "value": 1.28
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "PASS"
+
+def test_correct_return_rate_percentage_2(sample_df):
+    # S01 return_rate is 0.045900098 => 4.5900098%
+    # A claim of 4.59% should pass
+    claim = {
+        "store_id": "S01",
+        "week_start": "2025-05-05",
+        "metric": "return_rate",
+        "claim_type": "value",
+        "value": 4.59
     }
     res = verify_claim(claim, sample_df)
     assert res['status'] == "PASS"
@@ -191,3 +207,16 @@ def test_incorrect_return_rate_percentage(sample_df):
     }
     res = verify_claim(claim, sample_df)
     assert res['status'] == "FAIL"
+
+def test_schema_rejects_unsupported_ranking():
+    with pytest.raises(ValidationError) as exc_info:
+        Claim(
+            store_id="S01",
+            week_start="2025-04-07",
+            metric="sales_per_staffed_hour",
+            claim_type="ranking",
+            value="1st",
+            importance="high",
+            text="S01 was 1st in sales per staffed hour."
+        )
+    assert "must have value 'highest' or 'lowest'" in str(exc_info.value)

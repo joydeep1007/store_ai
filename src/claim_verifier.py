@@ -89,10 +89,17 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
         
     if claim_type == "value":
         if isinstance(actual_value, (int, float)) and isinstance(claimed_value, (int, float)):
-            if math.isclose(actual_value, claimed_value, rel_tol=1e-3, abs_tol=1e-3):
-                return {"status": "PASS", "reason": "Claim matches trusted metric.", "expected_value": actual_value, "claimed_value": claimed_value}
+            if metric == 'return_rate':
+                # Use absolute tolerance equivalent to 2 decimal places rounding
+                if math.isclose(actual_value, claimed_value, abs_tol=0.0051):
+                    return {"status": "PASS", "reason": "Claim matches trusted metric (2 decimal place precision).", "expected_value": actual_value, "claimed_value": claimed_value}
+                else:
+                    return {"status": "FAIL", "reason": "Unsupported numerical claim.", "expected_value": actual_value, "claimed_value": claimed_value}
             else:
-                return {"status": "FAIL", "reason": "Unsupported numerical claim.", "expected_value": actual_value, "claimed_value": claimed_value}
+                if math.isclose(actual_value, claimed_value, rel_tol=1e-3, abs_tol=1e-3):
+                    return {"status": "PASS", "reason": "Claim matches trusted metric.", "expected_value": actual_value, "claimed_value": claimed_value}
+                else:
+                    return {"status": "FAIL", "reason": "Unsupported numerical claim.", "expected_value": actual_value, "claimed_value": claimed_value}
         else:
             if str(actual_value) == str(claimed_value):
                 return {"status": "PASS", "reason": "Claim matches trusted metric.", "expected_value": actual_value, "claimed_value": claimed_value}
