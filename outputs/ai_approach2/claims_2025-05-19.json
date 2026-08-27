@@ -32,7 +32,7 @@
       "value": 22.56,
       "unit": "percent",
       "importance": "high",
-      "text": "Store S05 experienced the highest revenue growth at 22.56%."
+      "text": "Store S05 experienced a significant revenue growth of 22.56%."
     },
     {
       "store_id": "S03",
@@ -48,13 +48,35 @@
     {
       "store_id": "S01",
       "week_start": "2025-05-19",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 1.04,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S01 had the lowest return rate at 1.04%."
+    },
+    {
+      "store_id": "S05",
+      "week_start": "2025-05-19",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 3.21,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S05 had the highest return rate at 3.21%."
+    },
+    {
+      "store_id": "S01",
+      "week_start": "2025-05-19",
       "metric": "sales_per_staffed_hour",
       "claim_type": "ranking",
       "ranking": "highest",
       "value": 51.62,
       "unit": "$",
-      "importance": "medium",
-      "text": "Store S01 had the highest sales per staffed hour at $51.62."
+      "importance": "high",
+      "text": "Store S01 achieved the highest sales per staffed hour at $51.62."
     },
     {
       "store_id": "S03",
@@ -64,19 +86,8 @@
       "ranking": "lowest",
       "value": 25.19,
       "unit": "$",
-      "importance": "medium",
-      "text": "Store S03 had the lowest sales per staffed hour at $25.19."
-    },
-    {
-      "store_id": "S05",
-      "week_start": "2025-05-19",
-      "metric": "return_rate",
-      "claim_type": "percentage",
-      "ranking": null,
-      "value": 3.21,
-      "unit": "percent",
-      "importance": "medium",
-      "text": "Store S05 reported the highest return rate at 3.21%."
+      "importance": "high",
+      "text": "Store S03 recorded the lowest sales per staffed hour at $25.19."
     }
   ]
 }

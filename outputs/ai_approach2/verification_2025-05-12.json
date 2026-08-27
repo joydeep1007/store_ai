@@ -62,9 +62,9 @@
       "text": "Store S03 experienced a significant revenue decline of 61.31%."
     },
     "verification": {
-      "status": "FAIL",
-      "reason": "Unsupported percentage claim.",
-      "expected_value": -135.81301013454717,
+      "status": "PASS",
+      "reason": "Claim matches trusted revenue growth metric.",
+      "expected_value": -61.31227876802387,
       "claimed_value": -61.31
     }
   },
@@ -95,6 +95,31 @@
   },
   {
     "claim": {
+      "store_id": "S04",
+      "week_start": "2025-05-12",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 0.94,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S04 had the lowest return rate at 0.94%."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S04",
+        "value": 0.94245739320033
+      },
+      "claimed_value": {
+        "store": "S04",
+        "value": 0.94
+      }
+    }
+  },
+  {
+    "claim": {
       "store_id": "S01",
       "week_start": "2025-05-12",
       "metric": "sales_per_staffed_hour",
@@ -102,7 +127,7 @@
       "ranking": "highest",
       "value": 43.73,
       "unit": "$",
-      "importance": "medium",
+      "importance": "high",
       "text": "Store S01 achieved the highest sales per staffed hour at $43.73."
     },
     "verification": {
@@ -127,7 +152,7 @@
       "ranking": "lowest",
       "value": 23.72,
       "unit": "$",
-      "importance": "medium",
+      "importance": "high",
       "text": "Store S03 recorded the lowest sales per staffed hour at $23.72."
     },
     "verification": {

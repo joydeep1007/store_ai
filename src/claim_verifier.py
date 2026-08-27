@@ -109,32 +109,37 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
                 
     elif claim_type == "percentage":
         if metric == "revenue_growth_pct":
-            expected_pct = actual_value
+            # Calculate percentage WoW change for the metric (weekly_revenue)
+            prev_week = target_week - timedelta(days=7)
+            prev_row = df[(df['store_id'] == store_id) & (df['week_start'] == prev_week)]
+            
+            if prev_row.empty:
+                return {"status": "FAIL", "reason": "Previous week data not found for percentage calculation.", "expected_value": None, "claimed_value": claimed_value}
+                
+            prev_val = prev_row.iloc[0]['weekly_revenue']
+            actual_revenue = row.iloc[0]['weekly_revenue']
+                
+            if pd.isna(prev_val) or prev_val == 0:
+                return {"status": "FAIL", "reason": "Previous week value is missing or zero.", "expected_value": None, "claimed_value": claimed_value}
+                
+            expected_pct = ((actual_revenue - prev_val) / prev_val) * 100
+            
             if isinstance(claimed_value, (int, float)) and math.isclose(expected_pct, claimed_value, rel_tol=1e-2, abs_tol=1e-2):
-                return {"status": "PASS", "reason": "Claim matches trusted revenue growth metric.", "expected_value": expected_pct, "claimed_value": claimed_value}
+                return {"status": "PASS", "reason": "Percentage claim matches trusted metric.", "expected_value": expected_pct, "claimed_value": claimed_value}
             else:
                 return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": expected_pct, "claimed_value": claimed_value}
                 
-        # Calculate percentage WoW change for the metric
-        prev_week = target_week - timedelta(days=7)
-        prev_row = df[(df['store_id'] == store_id) & (df['week_start'] == prev_week)]
+        elif metric == "return_rate":
+            if isinstance(claimed_value, (int, float)) and math.isclose(actual_value, claimed_value, abs_tol=0.0051):
+                return {"status": "PASS", "reason": "Claim matches trusted metric (2 decimal place precision).", "expected_value": actual_value, "claimed_value": claimed_value}
+            else:
+                return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": actual_value, "claimed_value": claimed_value}
         
-        if prev_row.empty:
-            return {"status": "FAIL", "reason": "Previous week data not found for percentage calculation.", "expected_value": None, "claimed_value": claimed_value}
-            
-        prev_val = prev_row.iloc[0][metric]
-        if metric == 'return_rate' and pd.notna(prev_val):
-            prev_val = prev_val * 100
-            
-        if pd.isna(prev_val) or prev_val == 0:
-            return {"status": "FAIL", "reason": "Previous week value is missing or zero.", "expected_value": None, "claimed_value": claimed_value}
-            
-        expected_pct = ((actual_value - prev_val) / prev_val) * 100
-        
-        if isinstance(claimed_value, (int, float)) and math.isclose(expected_pct, claimed_value, rel_tol=1e-2, abs_tol=1e-2):
-            return {"status": "PASS", "reason": "Percentage claim matches trusted metric.", "expected_value": expected_pct, "claimed_value": claimed_value}
         else:
-            return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": expected_pct, "claimed_value": claimed_value}
+            if isinstance(claimed_value, (int, float)) and math.isclose(actual_value, claimed_value, rel_tol=1e-3, abs_tol=1e-3):
+                return {"status": "PASS", "reason": "Claim matches trusted metric.", "expected_value": actual_value, "claimed_value": claimed_value}
+            else:
+                return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": actual_value, "claimed_value": claimed_value}
             
     elif claim_type == "ranking":
         ranking = claim.get("ranking")

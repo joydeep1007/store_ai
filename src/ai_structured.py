@@ -178,8 +178,8 @@ Examples include:
 For a percentage claim:
 - ranking must be null.
 - value must contain the actual numerical percentage value.
-- Do not use ranking='highest' or ranking='lowest' unless the
-  relative ranking itself is the actual finding.
+
+CRITICAL: If the finding is that a percentage metric (like return_rate) is the highest or lowest among stores, YOU MUST USE claim_type='ranking' (NOT 'percentage'). claim_type='percentage' MUST ALWAYS have ranking=null.
 
 Example:
 

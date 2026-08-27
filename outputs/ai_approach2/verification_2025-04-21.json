@@ -109,12 +109,12 @@
       "value": -19.15,
       "unit": "percent",
       "importance": "high",
-      "text": "Store S03 experienced a significant revenue decline of 19.15%."
+      "text": "Store S03 experienced a revenue decline of 19.15%."
     },
     "verification": {
-      "status": "FAIL",
-      "reason": "Unsupported percentage claim.",
-      "expected_value": -157.0066853796034,
+      "status": "PASS",
+      "reason": "Claim matches trusted revenue growth metric.",
+      "expected_value": -19.145847794316857,
       "claimed_value": -19.15
     }
   },

@@ -10,62 +10,29 @@
       "value": 13535.98,
       "unit": "$",
       "importance": "high",
-      "text": "Store S04 had the highest weekly revenue of $13,535.98."
+      "text": "Store S04 achieved the highest weekly revenue of $13,535.98."
     },
     {
       "store_id": "S03",
       "week_start": "2025-04-14",
-      "metric": "weekly_revenue",
-      "claim_type": "ranking",
-      "ranking": "lowest",
-      "value": 10113.42,
-      "unit": "$",
-      "importance": "medium",
-      "text": "Store S03 had the lowest weekly revenue of $10,113.42."
+      "metric": "revenue_growth_pct",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": 33.59,
+      "unit": "percent",
+      "importance": "high",
+      "text": "Store S03 experienced a significant revenue growth of 33.59%."
     },
     {
       "store_id": "S01",
       "week_start": "2025-04-14",
-      "metric": "sales_per_staffed_hour",
-      "claim_type": "ranking",
-      "ranking": "highest",
-      "value": 41.11,
-      "unit": "$",
-      "importance": "high",
-      "text": "Store S01 had the highest sales per staffed hour at $41.11."
-    },
-    {
-      "store_id": "S05",
-      "week_start": "2025-04-14",
-      "metric": "sales_per_staffed_hour",
-      "claim_type": "ranking",
-      "ranking": "lowest",
-      "value": 26.53,
-      "unit": "$",
-      "importance": "high",
-      "text": "Store S05 had the lowest sales per staffed hour at $26.53."
-    },
-    {
-      "store_id": "S04",
-      "week_start": "2025-04-14",
-      "metric": "return_rate",
-      "claim_type": "ranking",
-      "ranking": "lowest",
-      "value": 1.62,
+      "metric": "revenue_growth_pct",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": -10.89,
       "unit": "percent",
-      "importance": "medium",
-      "text": "Store S04 had the lowest return rate at 1.62%."
-    },
-    {
-      "store_id": "S03",
-      "week_start": "2025-04-14",
-      "metric": "return_rate",
-      "claim_type": "ranking",
-      "ranking": "highest",
-      "value": 3.18,
-      "unit": "percent",
-      "importance": "medium",
-      "text": "Store S03 had the highest return rate at 3.18%."
+      "importance": "high",
+      "text": "Store S01 saw a revenue decline of 10.89%."
     },
     {
       "store_id": "S05",
@@ -76,7 +43,29 @@
       "value": 400.5,
       "unit": "hours",
       "importance": "medium",
-      "text": "Store S05 had the highest staffing hours at 400.5 hours."
+      "text": "Store S05 utilized the highest amount of staffing hours at 400.5."
+    },
+    {
+      "store_id": "S04",
+      "week_start": "2025-04-14",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 1.62,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S04 maintained the lowest return rate at 1.62%."
+    },
+    {
+      "store_id": "S01",
+      "week_start": "2025-04-14",
+      "metric": "sales_per_staffed_hour",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 41.11,
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S01 achieved the highest sales per staffed hour at $41.11."
     }
   ]
 }

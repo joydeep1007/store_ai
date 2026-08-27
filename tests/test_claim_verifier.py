@@ -54,7 +54,7 @@ def test_correct_percentage(sample_df):
     claim = {
         "store_id": "S01",
         "week_start": "2025-05-12",
-        "metric": "weekly_revenue",
+        "metric": "revenue_growth_pct",
         "claim_type": "percentage",
         "value": 10.0
     }
@@ -152,7 +152,7 @@ def test_negative_revenue_growth(sample_df):
     claim = {
         "store_id": "S02",
         "week_start": "2025-05-12",
-        "metric": "weekly_revenue",
+        "metric": "revenue_growth_pct",
         "claim_type": "percentage",
         "value": -20.0
     }
@@ -164,13 +164,13 @@ def test_previous_revenue_zero_or_missing(sample_df):
     claim = {
         "store_id": "S03",
         "week_start": "2025-05-12",
-        "metric": "weekly_revenue",
+        "metric": "revenue_growth_pct",
         "claim_type": "percentage",
         "value": 1000.0
     }
     res = verify_claim(claim, sample_df)
-    assert res['status'] == "FAIL"
-    assert "missing or zero" in res['reason']
+    assert res['status'] == "UNSUPPORTED"
+    assert "missing" in res['reason'].lower()
 
 def test_correct_return_rate_percentage(sample_df):
     # S02 return_rate is 0.012757928 => 1.2757928%
@@ -334,3 +334,56 @@ def test_revenue_growth_unsupported_zero_prev(sample_df):
     res = verify_claim(claim, sample_df)
     assert res['status'] == "UNSUPPORTED"
     assert "missing" in res['reason'].lower()
+
+def test_return_rate_percentage_direct_compare_pass():
+    data = {
+        'store_id': ['S03', 'S05'],
+        'week_start': ['2025-04-28', '2025-05-19'],
+        'weekly_revenue': [1000.0, 2000.0],
+        'return_rate': [0.0022, 0.0321]
+    }
+    df = pd.DataFrame(data)
+    df['week_start'] = pd.to_datetime(df['week_start'])
+    
+    # Test 1: S03, 2025-04-28, return_rate = 0.22
+    claim1 = {
+        "store_id": "S03",
+        "week_start": "2025-04-28",
+        "metric": "return_rate",
+        "claim_type": "percentage",
+        "value": 0.22
+    }
+    res1 = verify_claim(claim1, df)
+    assert res1['status'] == "PASS"
+
+    # Test 2: S05, 2025-05-19, return_rate = 3.21
+    claim2 = {
+        "store_id": "S05",
+        "week_start": "2025-05-19",
+        "metric": "return_rate",
+        "claim_type": "percentage",
+        "value": 3.21
+    }
+    res2 = verify_claim(claim2, df)
+    assert res2['status'] == "PASS"
+
+def test_return_rate_percentage_direct_compare_fail():
+    data = {
+        'store_id': ['S03'],
+        'week_start': ['2025-04-28'],
+        'weekly_revenue': [1000.0],
+        'return_rate': [0.002246550887]
+    }
+    df = pd.DataFrame(data)
+    df['week_start'] = pd.to_datetime(df['week_start'])
+    
+    # Incorrect claim: 2.22 instead of 0.22
+    claim = {
+        "store_id": "S03",
+        "week_start": "2025-04-28",
+        "metric": "return_rate",
+        "claim_type": "percentage",
+        "value": 2.22
+    }
+    res = verify_claim(claim, df)
+    assert res['status'] == "FAIL"
