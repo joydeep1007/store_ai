@@ -128,6 +128,17 @@ def build_weekly_metrics(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
         np.nan
     )
     
+    # 6. Revenue growth pct
+    # Calculate WoW revenue growth
+    final_df = final_df.sort_values(["store_id", "week_start"])
+    final_df["prev_week_revenue"] = final_df.groupby("store_id")["weekly_revenue"].shift(1)
+    final_df["revenue_growth_pct"] = np.where(
+        final_df["prev_week_revenue"].notnull() & (final_df["prev_week_revenue"] > 0),
+        ((final_df["weekly_revenue"] - final_df["prev_week_revenue"]) / final_df["prev_week_revenue"]) * 100,
+        np.nan
+    )
+    final_df = final_df.drop(columns=["prev_week_revenue"])
+    
     # Sort and order columns
     cols = [
         "store_id",
@@ -138,7 +149,8 @@ def build_weekly_metrics(dfs: Dict[str, pd.DataFrame]) -> pd.DataFrame:
         "return_count",
         "return_rate",
         "staffing_hours",
-        "sales_per_staffed_hour"
+        "sales_per_staffed_hour",
+        "revenue_growth_pct"
     ]
     final_df = final_df[cols].sort_values(["store_id", "week_start"]).reset_index(drop=True)
     
@@ -224,6 +236,10 @@ def validate_weekly_metrics(final_df: pd.DataFrame, raw_dfs: Dict[str, pd.DataFr
     
     mask_no_rev = final_df["weekly_revenue"].isnull() | (final_df["weekly_revenue"] <= 0)
     assert final_df.loc[mask_no_rev, "return_rate"].isnull().all(), "return_rate should be NaN when revenue <= 0."
+    
+    # 13c. Revenue growth verification
+    first_weeks = final_df.groupby("store_id").head(1)
+    assert first_weeks["revenue_growth_pct"].isnull().all(), "First week revenue_growth_pct must be NaN."
     
     # 14. Special case validation
     s04_week = final_df[(final_df["store_id"] == "S04") & (final_df["week_start"] == "2025-05-12")]

@@ -28,7 +28,8 @@ MetricEnum = Literal[
     'return_count', 
     'return_rate', 
     'staffing_hours', 
-    'sales_per_staffed_hour'
+    'sales_per_staffed_hour',
+    'revenue_growth_pct'
 ]
 
 ClaimTypeEnum = Literal['value', 'percentage', 'ranking']
@@ -51,6 +52,9 @@ class Claim(BaseModel):
         if self.claim_type == 'ranking':
             if self.ranking not in ['highest', 'lowest']:
                 raise ValueError("Ranking claims must have ranking 'highest' or 'lowest'")
+        else:
+            if self.ranking is not None:
+                raise ValueError("Non-ranking claims must have ranking set to null")
         return self
 
 class WeeklyClaims(BaseModel):
@@ -84,16 +88,19 @@ def generate_structured_claims(week_start: str, df: pd.DataFrame, client: genai.
     for _, row in current_week_df.iterrows():
         store_id = row['store_id']
         rev = row['weekly_revenue']
+        growth = row['revenue_growth_pct']
         trans = row['transaction_count']
         ret = row['return_rate']
         staff = row['staffing_hours']
         sph = row['sales_per_staffed_hour']
         
+        growth_str = f"{growth:.2f}%" if pd.notna(growth) else "MISSING"
         staff_str = f"{staff:.1f}" if pd.notna(staff) else "MISSING"
         sph_str = f"${sph:.2f}" if pd.notna(sph) else "MISSING"
         
         context_lines.append(f"- Store: {store_id}")
         context_lines.append(f"  - weekly_revenue: ${rev:,.2f}")
+        context_lines.append(f"  - revenue_growth_pct: {growth_str}")
         context_lines.append(f"  - transaction_count: {trans}")
         context_lines.append(f"  - return_rate: {ret:.2%}")
         context_lines.append(f"  - staffing_hours: {staff_str}")
@@ -118,46 +125,101 @@ Grounding rules:
 CLAIM TYPE DEFINITIONS:
 
 A. VALUE CLAIM
-Use claim_type='value' when the main purpose is to report the actual
-value of a metric for a specific store and week.
+
+Use claim_type='value' when the primary purpose is to report the
+absolute value of a metric for a specific store and week.
 
 Example:
-- Store S01 generated $14,315.48 in weekly revenue.
 
-For a value claim:
-- ranking must be null.
-- value must contain the actual numerical metric value.
+Store S01 generated $14,315.48 in weekly revenue.
+
+The structured claim should be:
+
+{
+  "metric": "weekly_revenue",
+  "claim_type": "value",
+  "ranking": null,
+  "value": 14315.48
+}
+
+A value claim should NOT be converted into a ranking claim simply
+because the value happens to be the highest or lowest.
 
 B. RANKING CLAIM
-Use claim_type='ranking' ONLY when the relative position of a store
-among all stores for that metric and week is itself an important finding.
 
-Examples:
-- Store S01 had the highest weekly revenue.
-- Store S03 had the lowest sales per staffed hour.
+Use claim_type='ranking' only when the business finding is that a
+specific store is the highest or lowest among the stores for the
+specified metric during the target week.
 
 For a ranking claim:
 - ranking MUST be exactly 'highest' or 'lowest'.
 - value MUST contain the actual numerical metric value for that store.
-- Never put 'highest', 'lowest', '1st', 'top', or similar text in value.
+- ranking and value represent two separate facts.
+- The verifier will independently verify both facts.
+
+Example:
+
+{
+  "metric": "weekly_revenue",
+  "claim_type": "ranking",
+  "ranking": "highest",
+  "value": 23516.04
+}
 
 C. PERCENTAGE CLAIM
-Use claim_type='percentage' when reporting a percentage metric or a
-week-over-week percentage change, such as revenue_growth_pct or
-return_rate.
 
-Do not convert an ordinary value claim into a ranking claim merely
-because it has a numerical value.
+Use claim_type='percentage' when the primary finding is a percentage
+or percentage change.
+
+Examples include:
+- revenue_growth_pct
+- return_rate
+
+For a percentage claim:
+- ranking must be null.
+- value must contain the actual numerical percentage value.
+- Do not use ranking='highest' or ranking='lowest' unless the
+  relative ranking itself is the actual finding.
+
+Example:
+
+Store S03 revenue increased 171.20% week over week.
+
+The structured claim should be:
+
+{
+  "metric": "revenue_growth_pct",
+  "claim_type": "percentage",
+  "ranking": null,
+  "value": 171.20
+}
 
 CLAIM SELECTION:
-- Prefer claims that are materially useful to management.
-- Use ranking claims when the highest/lowest position is itself
-  meaningful.
-- Use value claims for important absolute metric observations.
-- Use percentage claims for meaningful percentage movements.
-- Do not force every claim to be a ranking.
-- Do not generate duplicate claims that express the same fact unless
-  the distinction is materially useful.
+
+Generate a diverse set of the most decision-useful factual claims.
+
+Use VALUE claims when an absolute metric value is important.
+
+Use RANKING claims only when the relative position of a store
+(highest or lowest) is itself an important business finding.
+
+Use PERCENTAGE claims for meaningful percentage movements such as
+revenue_growth_pct and return_rate.
+
+Do not convert every observation into a ranking claim merely because
+multiple stores are present.
+
+Choose the claim_type that best represents the actual business finding.
+
+The claim type must describe the nature of the finding, not merely
+the existence of a numerical value.
+
+Avoid generating multiple claims that express the same underlying
+fact using different claim types.
+
+Do not artificially force a fixed number of value, ranking, or
+percentage claims. Select the most meaningful claims from the
+provided trusted metrics.
 
 RANKING FORMAT:
 If claim_type='ranking':
@@ -169,6 +231,9 @@ MISSING DATA:
 - Never substitute zero for missing data.
 - Do not create ranking claims involving a metric when the relevant
   value is missing or unsupported.
+- `revenue_growth_pct` is a trusted Python-provided metric.
+- Do not calculate `revenue_growth_pct` independently.
+- Missing growth values (e.g., MISSING) must not be treated as zero.
 
 The verifier will independently check every claim against the trusted
 dataset.

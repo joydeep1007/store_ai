@@ -9,7 +9,8 @@ ALLOWED_METRICS = {
     'return_count',
     'return_rate', 
     'staffing_hours', 
-    'sales_per_staffed_hour'
+    'sales_per_staffed_hour',
+    'revenue_growth_pct'
 }
 
 def verify_claim(claim: dict, df: pd.DataFrame) -> dict:

@@ -5,15 +5,23 @@
       "week_start": "2025-04-14",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
-      "value": "highest",
+      "ranking": "highest",
+      "value": 13535.98,
+      "unit": "$",
       "importance": "high",
-      "text": "Store S04 achieved the highest weekly revenue of $13,535.98."
+      "text": "Store S04 had the highest weekly revenue of $13,535.98."
     },
     "verification": {
       "status": "PASS",
-      "reason": "Ranking claim (highest) verified.",
-      "expected_value": "S04",
-      "claimed_value": "S04"
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S04",
+        "value": 13535.98
+      },
+      "claimed_value": {
+        "store": "S04",
+        "value": 13535.98
+      }
     }
   },
   {
@@ -22,49 +30,23 @@
       "week_start": "2025-04-14",
       "metric": "weekly_revenue",
       "claim_type": "ranking",
-      "value": "lowest",
+      "ranking": "lowest",
+      "value": 10113.42,
+      "unit": "$",
       "importance": "medium",
-      "text": "Store S03 recorded the lowest weekly revenue of $10,113.42."
+      "text": "Store S03 had the lowest weekly revenue of $10,113.42."
     },
     "verification": {
       "status": "PASS",
-      "reason": "Ranking claim (lowest) verified.",
-      "expected_value": "S03",
-      "claimed_value": "S03"
-    }
-  },
-  {
-    "claim": {
-      "store_id": "S04",
-      "week_start": "2025-04-14",
-      "metric": "return_rate",
-      "claim_type": "value",
-      "value": 1.62,
-      "importance": "high",
-      "text": "Store S04 maintained the lowest return rate at 1.62%."
-    },
-    "verification": {
-      "status": "PASS",
-      "reason": "Claim matches trusted metric (2 decimal place precision).",
-      "expected_value": 1.6221950682551198,
-      "claimed_value": 1.62
-    }
-  },
-  {
-    "claim": {
-      "store_id": "S03",
-      "week_start": "2025-04-14",
-      "metric": "return_rate",
-      "claim_type": "value",
-      "value": 3.18,
-      "importance": "medium",
-      "text": "Store S03 had the highest return rate at 3.18%."
-    },
-    "verification": {
-      "status": "PASS",
-      "reason": "Claim matches trusted metric (2 decimal place precision).",
-      "expected_value": 3.18072422583062,
-      "claimed_value": 3.18
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S03",
+        "value": 10113.42
+      },
+      "claimed_value": {
+        "store": "S03",
+        "value": 10113.42
+      }
     }
   },
   {
@@ -72,16 +54,24 @@
       "store_id": "S01",
       "week_start": "2025-04-14",
       "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "highest",
       "value": 41.11,
+      "unit": "$",
       "importance": "high",
-      "text": "Store S01 achieved the highest sales per staffed hour at $41.11."
+      "text": "Store S01 had the highest sales per staffed hour at $41.11."
     },
     "verification": {
       "status": "PASS",
-      "reason": "Claim matches trusted metric.",
-      "expected_value": 41.111601675797615,
-      "claimed_value": 41.11
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S01",
+        "value": 41.111601675797615
+      },
+      "claimed_value": {
+        "store": "S01",
+        "value": 41.11
+      }
     }
   },
   {
@@ -89,16 +79,74 @@
       "store_id": "S05",
       "week_start": "2025-04-14",
       "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "lowest",
       "value": 26.53,
-      "importance": "medium",
-      "text": "Store S05 recorded the lowest sales per staffed hour at $26.53."
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S05 had the lowest sales per staffed hour at $26.53."
     },
     "verification": {
       "status": "PASS",
-      "reason": "Claim matches trusted metric.",
-      "expected_value": 26.534881398252185,
-      "claimed_value": 26.53
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S05",
+        "value": 26.534881398252185
+      },
+      "claimed_value": {
+        "store": "S05",
+        "value": 26.53
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S04",
+      "week_start": "2025-04-14",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 1.62,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S04 had the lowest return rate at 1.62%."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S04",
+        "value": 1.6221950682551198
+      },
+      "claimed_value": {
+        "store": "S04",
+        "value": 1.62
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S03",
+      "week_start": "2025-04-14",
+      "metric": "return_rate",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 3.18,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S03 had the highest return rate at 3.18%."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S03",
+        "value": 3.18072422583062
+      },
+      "claimed_value": {
+        "store": "S03",
+        "value": 3.18
+      }
     }
   },
   {
@@ -106,16 +154,24 @@
       "store_id": "S05",
       "week_start": "2025-04-14",
       "metric": "staffing_hours",
-      "claim_type": "value",
+      "claim_type": "ranking",
+      "ranking": "highest",
       "value": 400.5,
+      "unit": "hours",
       "importance": "medium",
-      "text": "Store S05 utilized the highest number of staffing hours at 400.5."
+      "text": "Store S05 had the highest staffing hours at 400.5 hours."
     },
     "verification": {
       "status": "PASS",
-      "reason": "Claim matches trusted metric.",
-      "expected_value": 400.5,
-      "claimed_value": 400.5
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S05",
+        "value": 400.5
+      },
+      "claimed_value": {
+        "store": "S05",
+        "value": 400.5
+      }
     }
   }
 ]

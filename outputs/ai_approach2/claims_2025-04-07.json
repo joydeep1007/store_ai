@@ -10,7 +10,7 @@
       "value": 14315.48,
       "unit": "$",
       "importance": "high",
-      "text": "Store S01 had the highest weekly revenue of $14,315.48."
+      "text": "Store S01 achieved the highest weekly revenue of $14,315.48."
     },
     {
       "store_id": "S03",
@@ -21,7 +21,7 @@
       "value": 7570.76,
       "unit": "$",
       "importance": "high",
-      "text": "Store S03 had the lowest weekly revenue of $7,570.76."
+      "text": "Store S03 recorded the lowest weekly revenue of $7,570.76."
     },
     {
       "store_id": "S01",
