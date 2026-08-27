@@ -44,9 +44,9 @@
       "text": "Store S04 had the highest return rate at 4.59%."
     },
     "verification": {
-      "status": "FAIL",
-      "reason": "Unsupported numerical claim.",
-      "expected_value": 0.0459000983608146,
+      "status": "PASS",
+      "reason": "Claim matches trusted metric.",
+      "expected_value": 4.59000983608146,
       "claimed_value": 4.59
     }
   },
@@ -75,30 +75,13 @@
       "claim_type": "value",
       "value": 1.28,
       "importance": "medium",
-      "text": "Store S02 maintained the lowest return rate among all stores at 1.28%."
+      "text": "Store S02 maintained the lowest return rate at 1.28%."
     },
     "verification": {
       "status": "FAIL",
       "reason": "Unsupported numerical claim.",
-      "expected_value": 0.0127579279654035,
+      "expected_value": 1.2757927965403502,
       "claimed_value": 1.28
-    }
-  },
-  {
-    "claim": {
-      "store_id": "S05",
-      "week_start": "2025-05-05",
-      "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
-      "value": 27.75,
-      "importance": "medium",
-      "text": "Store S05 recorded the lowest sales per staffed hour at $27.75."
-    },
-    "verification": {
-      "status": "PASS",
-      "reason": "Claim matches trusted metric.",
-      "expected_value": 27.748387970739635,
-      "claimed_value": 27.75
     }
   }
 ]

@@ -44,16 +44,7 @@
       "claim_type": "value",
       "value": 1.28,
       "importance": "medium",
-      "text": "Store S02 maintained the lowest return rate among all stores at 1.28%."
-    },
-    {
-      "store_id": "S05",
-      "week_start": "2025-05-05",
-      "metric": "sales_per_staffed_hour",
-      "claim_type": "value",
-      "value": 27.75,
-      "importance": "medium",
-      "text": "Store S05 recorded the lowest sales per staffed hour at $27.75."
+      "text": "Store S02 maintained the lowest return rate at 1.28%."
     }
   ]
 }

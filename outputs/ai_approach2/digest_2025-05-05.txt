@@ -2,15 +2,16 @@ WEEKLY OPERATIONS DIGEST
 Week: 2025-05-05
 
 1. Key Observations
-* Store S03 achieved the highest weekly revenue of $23,516.04.
-* Store S03 achieved the highest sales per staffed hour at $56.42.
+* Store S03 achieved the highest weekly revenue ($23,516.04) and the highest sales per staffed hour ($56.42).
+* Store S05 recorded the lowest weekly revenue at $10,241.93.
 
 2. Important Changes
-* N/A
+* Store S04 reported the highest return rate at 4.59%.
 
 3. Areas Requiring Attention
-* Store S05 recorded the lowest weekly revenue of $10,241.93.
-* Store S05 recorded the lowest sales per staffed hour at $27.75.
+* The return rate at Store S04 (4.59%).
+* The revenue performance at Store S05 ($10,241.93).
 
 4. Recommended Focus
-* Review operational performance at Store S05 to address the current revenue and sales per staffed hour metrics.
+* Analyze factors contributing to the high return rate at S04.
+* Review operational performance at S05 to address the lowest revenue ranking.

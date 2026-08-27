@@ -15,7 +15,8 @@ def sample_df():
         'weekly_revenue': [10000.0, 11000.0, 15000.0, 12000.0, 0.0, 5000.0],
         'transaction_count': [100, 110, 150, 120, 0, 50],
         'staffing_hours': [300.0, 310.0, 350.0, np.nan, 200.0, 210.0],
-        'sales_per_staffed_hour': [33.33, 35.48, 42.86, np.nan, 0.0, 23.81]
+        'sales_per_staffed_hour': [33.33, 35.48, 42.86, np.nan, 0.0, 23.81],
+        'return_rate': [0.015, 0.020, 0.0128, 0.010, 0.0, 0.025]
     }
     df = pd.DataFrame(data)
     df['week_start'] = pd.to_datetime(df['week_start'])
@@ -166,3 +167,27 @@ def test_previous_revenue_zero_or_missing(sample_df):
     res = verify_claim(claim, sample_df)
     assert res['status'] == "FAIL"
     assert "missing or zero" in res['reason']
+
+def test_correct_return_rate_percentage(sample_df):
+    # S02 return_rate is 0.0128 => 1.28%
+    claim = {
+        "store_id": "S02",
+        "week_start": "2025-05-05",
+        "metric": "return_rate",
+        "claim_type": "value",
+        "value": 1.28
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "PASS"
+
+def test_incorrect_return_rate_percentage(sample_df):
+    # S02 return_rate is 0.0128 => 1.28%
+    claim = {
+        "store_id": "S02",
+        "week_start": "2025-05-05",
+        "metric": "return_rate",
+        "claim_type": "value",
+        "value": 2.50
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "FAIL"

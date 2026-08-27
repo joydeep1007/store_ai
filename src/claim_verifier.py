@@ -68,6 +68,18 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
         
     actual_value = row.iloc[0][metric]
     
+    # Metric representation documentation:
+    # - weekly_revenue: raw numerical value
+    # - transaction_count: raw numerical value
+    # - return_amount: raw numerical value
+    # - return_count: raw numerical value
+    # - return_rate: decimal fraction (e.g., 0.0127 for 1.27%)
+    # - staffing_hours: raw numerical value
+    # - sales_per_staffed_hour: raw numerical value
+    
+    # Convert decimal fraction to percentage points for return_rate
+    if metric == 'return_rate' and pd.notna(actual_value):
+        actual_value = actual_value * 100
     # Missing data logic (e.g. staffing hours)
     if pd.isna(actual_value):
         return {
@@ -96,6 +108,9 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
             return {"status": "FAIL", "reason": "Previous week data not found for percentage calculation.", "expected_value": None, "claimed_value": claimed_value}
             
         prev_val = prev_row.iloc[0][metric]
+        if metric == 'return_rate' and pd.notna(prev_val):
+            prev_val = prev_val * 100
+            
         if pd.isna(prev_val) or prev_val == 0:
             return {"status": "FAIL", "reason": "Previous week value is missing or zero.", "expected_value": None, "claimed_value": claimed_value}
             
