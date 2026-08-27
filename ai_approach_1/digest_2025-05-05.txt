@@ -1,0 +1,65 @@
+--- SELECTED WEEK ---
+2025-05-05
+
+--- STRUCTURED METRICS / CONTEXT SENT TO LLM ---
+Target Week: 2025-05-05
+Store Metrics:
+- Store: S01
+  - Weekly Revenue: $13,699.01
+  - WoW Revenue Change: 7.54%
+  - Transaction Count: 257
+  - Return Rate: 3.26%
+  - Staffing Hours: 367.9
+  - Sales per Staffed Hour: $37.24
+- Store: S02
+  - Weekly Revenue: $10,986.11
+  - WoW Revenue Change: 14.71%
+  - Transaction Count: 209
+  - Return Rate: 1.28%
+  - Staffing Hours: 382.3
+  - Sales per Staffed Hour: $28.74
+- Store: S03
+  - Weekly Revenue: $23,516.04
+  - WoW Revenue Change: 171.20%
+  - Transaction Count: 304
+  - Return Rate: 1.45%
+  - Staffing Hours: 416.8
+  - Sales per Staffed Hour: $56.42
+- Store: S04
+  - Weekly Revenue: $12,382.98
+  - WoW Revenue Change: -0.58%
+  - Transaction Count: 237
+  - Return Rate: 4.59%
+  - Staffing Hours: 357.3
+  - Sales per Staffed Hour: $34.66
+- Store: S05
+  - Weekly Revenue: $10,241.93
+  - WoW Revenue Change: -0.32%
+  - Transaction Count: 200
+  - Return Rate: 2.86%
+  - Staffing Hours: 369.1
+  - Sales per Staffed Hour: $27.75
+
+Direct use of automatic function calling (AFC) in Models.generate_content is not recommended. Instead, we recommend to use AFC in Chat.send_message. Similarly, direct use of AFC in Models.generate_content_stream is not recommended. Instead, we recommend to use AFC in Chat.send_message_stream.
+--- GENERATED DIGEST ---
+
+WEEKLY OPERATIONS DIGEST
+Week: 2025-05-05
+
+**1. Executive Summary**
+Regional performance for the week shows significant variance in revenue growth, ranging from a 171.20% increase to a slight decline of 0.58%. Sales per staffed hour across the region range from a low of $27.75 (S05) to a high of $56.42 (S03).
+
+**2. Key Store Movements**
+*   **S03:** Experienced a substantial WoW revenue increase of 171.20%, achieving the highest weekly revenue ($23,516.04) and the highest sales per staffed hour ($56.42) in the region.
+*   **S02:** Demonstrated strong growth with a 14.71% WoW revenue increase, despite having the second-lowest sales per staffed hour ($28.74).
+*   **S04 & S05:** Both stores saw marginal revenue declines (-0.58% and -0.32%, respectively).
+
+**3. Areas Requiring Attention**
+*   **Return Rates:** S04 reports the highest return rate in the region at 4.59%.
+*   **Efficiency:** S05 maintains the lowest sales per staffed hour ($27.75) alongside a slight revenue decline.    
+*   **Revenue Stagnation:** S04 and S05 are the only stores in the region to report negative WoW revenue changes.   
+
+**4. Recommended Investigation**
+*   **S03 Performance:** Further investigation is required to determine the factors contributing to the 171.20% revenue surge.
+*   **S04 Returns:** Further investigation is required to identify the cause of the elevated 4.59% return rate.     
+*   **S05 Productivity:** Further investigation is required to understand the correlation between staffing hours and the current sales per staffed hour at S05.
