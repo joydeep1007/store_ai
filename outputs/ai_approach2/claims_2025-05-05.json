@@ -20,8 +20,8 @@
       "ranking": "lowest",
       "value": 10241.93,
       "unit": "$",
-      "importance": "high",
-      "text": "Store S05 recorded the lowest weekly revenue of $10,241.93."
+      "importance": "medium",
+      "text": "Store S05 recorded the lowest weekly revenue at $10,241.93."
     },
     {
       "store_id": "S03",
@@ -53,7 +53,7 @@
       "ranking": "highest",
       "value": 56.42,
       "unit": "$",
-      "importance": "medium",
+      "importance": "high",
       "text": "Store S03 achieved the highest sales per staffed hour at $56.42."
     },
     {

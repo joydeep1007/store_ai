@@ -1,0 +1,159 @@
+[
+  {
+    "claim": {
+      "store_id": "S01",
+      "week_start": "2025-05-19",
+      "metric": "weekly_revenue",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 14501.11,
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S01 achieved the highest weekly revenue of $14,501.11."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S01",
+        "value": 14501.11
+      },
+      "claimed_value": {
+        "store": "S01",
+        "value": 14501.11
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S03",
+      "week_start": "2025-05-19",
+      "metric": "weekly_revenue",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 8676.46,
+      "unit": "$",
+      "importance": "high",
+      "text": "Store S03 recorded the lowest weekly revenue of $8,676.46."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S03",
+        "value": 8676.46
+      },
+      "claimed_value": {
+        "store": "S03",
+        "value": 8676.46
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S05",
+      "week_start": "2025-05-19",
+      "metric": "revenue_growth_pct",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": 22.56,
+      "unit": "percent",
+      "importance": "high",
+      "text": "Store S05 experienced the highest revenue growth at 22.56%."
+    },
+    "verification": {
+      "status": "FAIL",
+      "reason": "Unsupported percentage claim.",
+      "expected_value": -216.95674333139445,
+      "claimed_value": 22.56
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S03",
+      "week_start": "2025-05-19",
+      "metric": "revenue_growth_pct",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": -4.63,
+      "unit": "percent",
+      "importance": "high",
+      "text": "Store S03 saw a revenue decline of 4.63%."
+    },
+    "verification": {
+      "status": "FAIL",
+      "reason": "Unsupported percentage claim.",
+      "expected_value": -92.44614737374457,
+      "claimed_value": -4.63
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S01",
+      "week_start": "2025-05-19",
+      "metric": "sales_per_staffed_hour",
+      "claim_type": "ranking",
+      "ranking": "highest",
+      "value": 51.62,
+      "unit": "$",
+      "importance": "medium",
+      "text": "Store S01 had the highest sales per staffed hour at $51.62."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (highest) and numerical value verified.",
+      "expected_value": {
+        "store": "S01",
+        "value": 51.62374510501959
+      },
+      "claimed_value": {
+        "store": "S01",
+        "value": 51.62
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S03",
+      "week_start": "2025-05-19",
+      "metric": "sales_per_staffed_hour",
+      "claim_type": "ranking",
+      "ranking": "lowest",
+      "value": 25.19,
+      "unit": "$",
+      "importance": "medium",
+      "text": "Store S03 had the lowest sales per staffed hour at $25.19."
+    },
+    "verification": {
+      "status": "PASS",
+      "reason": "Ranking claim (lowest) and numerical value verified.",
+      "expected_value": {
+        "store": "S03",
+        "value": 25.192973286875723
+      },
+      "claimed_value": {
+        "store": "S03",
+        "value": 25.19
+      }
+    }
+  },
+  {
+    "claim": {
+      "store_id": "S05",
+      "week_start": "2025-05-19",
+      "metric": "return_rate",
+      "claim_type": "percentage",
+      "ranking": null,
+      "value": 3.21,
+      "unit": "percent",
+      "importance": "medium",
+      "text": "Store S05 reported the highest return rate at 3.21%."
+    },
+    "verification": {
+      "status": "FAIL",
+      "reason": "Unsupported percentage claim.",
+      "expected_value": 186.6122948209153,
+      "claimed_value": 3.21
+    }
+  }
+]

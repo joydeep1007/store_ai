@@ -8,17 +8,19 @@ from src.ai_structured import Claim
 @pytest.fixture
 def sample_df():
     data = {
-        'store_id': ['S01', 'S01', 'S02', 'S02', 'S03', 'S03'],
+        'store_id': ['S01', 'S01', 'S02', 'S02', 'S03', 'S03', 'S04', 'S04'],
         'week_start': [
             '2025-05-05', '2025-05-12', 
             '2025-05-05', '2025-05-12', 
+            '2025-05-05', '2025-05-12',
             '2025-05-05', '2025-05-12'
         ],
-        'weekly_revenue': [10000.0, 11000.0, 15000.0, 12000.0, 0.0, 5000.0],
-        'transaction_count': [100, 110, 150, 120, 0, 50],
-        'staffing_hours': [300.0, 310.0, 350.0, np.nan, 200.0, 210.0],
-        'sales_per_staffed_hour': [33.33, 35.48, 42.86, np.nan, 0.0, 23.81],
-        'return_rate': [0.045900098, 0.020, 0.012757928, 0.010, 0.0, 0.025]
+        'weekly_revenue': [10000.0, 11000.0, 15000.0, 12000.0, 0.0, 5000.0, 1000.0, 2712.0],
+        'transaction_count': [100, 110, 150, 120, 0, 50, 10, 27],
+        'staffing_hours': [300.0, 310.0, 350.0, np.nan, 200.0, 210.0, 100.0, 120.0],
+        'sales_per_staffed_hour': [33.33, 35.48, 42.86, np.nan, 0.0, 23.81, 10.0, 22.6],
+        'return_rate': [0.045900098, 0.020, 0.012757928, 0.010, 0.0, 0.025, 0.0, 0.0],
+        'revenue_growth_pct': [np.nan, 10.0, np.nan, -20.0, np.nan, np.nan, np.nan, 171.20]
     }
     df = pd.DataFrame(data)
     df['week_start'] = pd.to_datetime(df['week_start'])
@@ -275,3 +277,60 @@ def test_ranking_incorrect_ranking_incorrect_value(sample_df):
     res = verify_claim(claim, sample_df)
     assert res['status'] == "FAIL"
     assert "ranking check failed" in res['reason'].lower()
+
+def test_revenue_growth_correct(sample_df):
+    claim = {
+        "store_id": "S04",
+        "week_start": "2025-05-12",
+        "metric": "revenue_growth_pct",
+        "claim_type": "percentage",
+        "value": 171.20
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "PASS"
+
+def test_revenue_growth_incorrect(sample_df):
+    claim = {
+        "store_id": "S04",
+        "week_start": "2025-05-12",
+        "metric": "revenue_growth_pct",
+        "claim_type": "percentage",
+        "value": 150.00
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "FAIL"
+
+def test_revenue_growth_negative(sample_df):
+    claim = {
+        "store_id": "S02",
+        "week_start": "2025-05-12",
+        "metric": "revenue_growth_pct",
+        "claim_type": "percentage",
+        "value": -20.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "PASS"
+
+def test_revenue_growth_unsupported_first_week(sample_df):
+    claim = {
+        "store_id": "S01",
+        "week_start": "2025-05-05",
+        "metric": "revenue_growth_pct",
+        "claim_type": "percentage",
+        "value": 10.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "UNSUPPORTED"
+    assert "missing" in res['reason'].lower()
+
+def test_revenue_growth_unsupported_zero_prev(sample_df):
+    claim = {
+        "store_id": "S03",
+        "week_start": "2025-05-12",
+        "metric": "revenue_growth_pct",
+        "claim_type": "percentage",
+        "value": 100.0
+    }
+    res = verify_claim(claim, sample_df)
+    assert res['status'] == "UNSUPPORTED"
+    assert "missing" in res['reason'].lower()

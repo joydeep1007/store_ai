@@ -108,6 +108,13 @@ def verify_claim(claim: dict, df: pd.DataFrame) -> dict:
                 return {"status": "FAIL", "reason": "Unsupported numerical claim.", "expected_value": actual_value, "claimed_value": claimed_value}
                 
     elif claim_type == "percentage":
+        if metric == "revenue_growth_pct":
+            expected_pct = actual_value
+            if isinstance(claimed_value, (int, float)) and math.isclose(expected_pct, claimed_value, rel_tol=1e-2, abs_tol=1e-2):
+                return {"status": "PASS", "reason": "Claim matches trusted revenue growth metric.", "expected_value": expected_pct, "claimed_value": claimed_value}
+            else:
+                return {"status": "FAIL", "reason": "Unsupported percentage claim.", "expected_value": expected_pct, "claimed_value": claimed_value}
+                
         # Calculate percentage WoW change for the metric
         prev_week = target_week - timedelta(days=7)
         prev_row = df[(df['store_id'] == store_id) & (df['week_start'] == prev_week)]
